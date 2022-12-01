@@ -5,6 +5,58 @@
 #include "FileParser.h"
 
 
-void FileParser::readfile(const std::string& filename) {
-
+GameOfLife& FileParser::readfile(const std::string& filename) {
+    ifile.open(filename);
+    std::vector<unsigned> birth;
+    std::vector<unsigned> survive;
+    getline(ifile,buf);
+    getline(ifile,buf);
+    buf.erase(0,3);
+    char a = buf.front();
+    buf.erase(0,1);
+    if (a=='B')
+    {
+        a = buf.front();
+        while(a!='/')
+        {
+            buf.erase(0,1);
+            int num = a - '0';
+            birth.push_back(num);
+            a = buf.front();
+        }
+    } else
+    {
+        throw std::exception("File format error");
+    }
+    buf.erase(0,1);
+    a = buf.front();
+    buf.erase(0,1);
+    if (a=='S')
+    {
+        a = buf.front();
+        while(buf.length())
+        {
+            buf.erase(0,1);
+            int num = a - '0';
+            survive.push_back(num);
+            if (buf.length())
+            {
+            a = buf.front();
+            }
+        }
+    } else
+    {
+        throw std::exception("File format error");
+    }
+    obj = *new GameOfLife(778,514,birth,survive);
+    while(getline(ifile,buf))
+    {
+        a = buf.front();
+        buf.erase(0,2);
+        int x = a - '0';
+        a = buf.front();
+        int y = a - '0';
+        obj.toggleCell(x,y);
+    }
+    return obj;
 }

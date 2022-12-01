@@ -21,11 +21,13 @@ GameOfLife::GameOfLife() {
     }
 }
 
-GameOfLife::GameOfLife(const unsigned &x, const unsigned &y) {
+GameOfLife::GameOfLife(const unsigned &x, const unsigned &y,const std::vector<unsigned> & birth, const std::vector<unsigned> & survive) {
     this->Xmax = x;
     this->Ymax = y;
     this->XSize = Xmax + 2;
     this->YSize = Ymax + 2;
+    this->birth = birth;
+    this->survive = survive;
     for (unsigned i = 0; i != this->XSize; i++)
     {
         std::vector<unsigned> inter;

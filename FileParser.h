@@ -8,14 +8,17 @@
 
 #include <vector>
 #include <string>
-
+#include <iostream>
+#include <fstream>
+#include "GameOfLife.h"
 class FileParser {
+private:
+    static std::ifstream ifile;
+    static GameOfLife obj;
+    static std::string buf;
 
 public:
-    std::vector<std::vector<unsigned int>> field;
-    int survive;
-    int birth;
-    static void readfile(const std::string& filename);
+    static GameOfLife& readfile(const std::string& filename);
 };
 
 

@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene();
     ui->graphicsView->setScene(scene);
     scene->addLine(0,0,50,50);
+    GameOfLife game = FileParser::readfile("input.txt");
 
 }
 
