@@ -6,6 +6,9 @@
 
 
 GameOfLife& FileParser::readfile(const std::string& filename) {
+    std::ifstream ifile;
+
+    std::string buf;
     ifile.open(filename);
     std::vector<unsigned> birth;
     std::vector<unsigned> survive;
@@ -26,7 +29,7 @@ GameOfLife& FileParser::readfile(const std::string& filename) {
         }
     } else
     {
-        throw std::exception("File format error");
+        throw std::invalid_argument("Divide by zero");
     }
     buf.erase(0,1);
     a = buf.front();
@@ -46,9 +49,9 @@ GameOfLife& FileParser::readfile(const std::string& filename) {
         }
     } else
     {
-        throw std::exception("File format error");
+        throw std::invalid_argument("Divide by zero");
     }
-    obj = *new GameOfLife(778,514,birth,survive);
+    GameOfLife& obj = *new GameOfLife(778,514,birth,survive);
     while(getline(ifile,buf))
     {
         a = buf.front();

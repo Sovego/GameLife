@@ -50,7 +50,7 @@ void GameOfLife::toggleCell(const unsigned &x, const unsigned &y)
 }
 
 // return the new value of a cell depending on the surrounding values
-unsigned GameOfLife::newValCell(const unsigned &x, const unsigned &y) const
+unsigned GameOfLife::newValCell(const unsigned &x, const unsigned &y)
 {
     unsigned stok;
     stok = this->field[x-1][y-1]
@@ -61,13 +61,18 @@ unsigned GameOfLife::newValCell(const unsigned &x, const unsigned &y) const
            + this->field[x+1][y-1]
            + this->field[x+1][y]
            + this->field[x+1][y+1];
-
-    switch(stok)
+    std::vector<unsigned>::iterator it;
+    it = find(this->birth.begin(),this->birth.end(),stok);
+    if (it != this->birth.end())
     {
-        case 3: return 1;
-        case 2: return this->field[x][y];
-        default: return 0;
+        return 1;
     }
+    it = find(this->survive.begin(),this->survive.end(),stok);
+    if (it != this->survive.end())
+    {
+        return this->field[x][y];
+    }
+    return 0;
 }
 
 void GameOfLife::updateField()

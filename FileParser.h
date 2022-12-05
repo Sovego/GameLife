@@ -12,11 +12,6 @@
 #include <fstream>
 #include "GameOfLife.h"
 class FileParser {
-private:
-    static std::ifstream ifile;
-    static GameOfLife obj;
-    static std::string buf;
-
 public:
     static GameOfLife& readfile(const std::string& filename);
 };

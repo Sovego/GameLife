@@ -22,7 +22,7 @@ private:
     unsigned XSize, YSize;
     std::vector<unsigned> birth, survive;
     std::vector<std::vector<unsigned>> field;
-    unsigned newValCell(const unsigned &, const unsigned &) const;
+    unsigned newValCell(const unsigned &, const unsigned &);
 };
 
 
